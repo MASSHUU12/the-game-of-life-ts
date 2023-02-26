@@ -7,23 +7,35 @@ let canvas: Canvas;
 const cols = 200,
   rows = 200;
 let grid: Grid;
+let run = false;
 
 function setup(): void {
   canvas = new Canvas(window.innerHeight - 5, window.innerHeight - 5);
   grid = new Grid(cols, rows);
+  canvas.drawGrid(grid);
 }
 
 function play(): void {
   // TODO: Delta time
 
-  canvas.drawGrid(grid);
-  grid.update = nextGeneration(grid);
-
+  if (run) {
+    canvas.drawGrid(grid);
+    grid.update = nextGeneration(grid);
+  }
   requestAnimationFrame(play);
 }
 
-// setup();
-
+// Listeners
 window.addEventListener("load", setup);
+document.getElementById("run")?.addEventListener("click", () => {
+  run = !run;
+});
+document.getElementById("save")?.addEventListener("click", () => {
+  const cells = document.getElementById("cells") as HTMLInputElement;
+  const numberOfCells = parseInt(cells.value);
+
+  grid = new Grid(numberOfCells, numberOfCells);
+  canvas.drawGrid(grid);
+});
 
 requestAnimationFrame(play);

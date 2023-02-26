@@ -1,5 +1,9 @@
+@import url("https://api.fonts.coollabs.io/css2?family=Poppins:wght@300;500&display=swap");
+
 * {
   margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
 }
 
 body {
@@ -9,7 +13,38 @@ body {
   background-color: #1f1f1f;
 }
 
-/* canvas {
-  border: 1px solid black;
-  margin: 2rem 0 0 0;
-} */
+.settings-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: whitesmoke;
+  padding: 1.3rem;
+  border-radius: 0.3rem;
+  top: 1.5rem;
+  left: 1.5rem;
+  user-select: none;
+
+  div {
+    input[type=number] {
+      background-color: whitesmoke;
+      border-top: unset;
+      border-left: unset;
+      border-right: unset;
+      border-bottom: solid 1px #1f1f1f;
+      color: gray;
+      margin: 0 0 0 0.3rem;
+      max-width: 30%;
+    }
+  }
+
+  button {
+    margin: 1.3rem 0 0 0;
+    border: none;
+    padding: 0.3rem 0;
+    background-color: #1f1f1f;
+    color: white;
+    border-radius: 0.3rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+}

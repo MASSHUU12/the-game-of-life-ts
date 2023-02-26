@@ -9,6 +9,14 @@
 
 <body>
   <div id="app"></div>
+  <div class="settings-container">
+    <p>Settings</p>
+    <div>
+      <label for="items">Cells:</label><input type="number" id="cells" min="1" max="99999" value="250" />
+    </div>
+    <button id="save">Update simulation</button>
+    <button id="run">Play/Stop</button>
+  </div>
   <script type="module" src="/src/main.ts"></script>
 </body>
 
