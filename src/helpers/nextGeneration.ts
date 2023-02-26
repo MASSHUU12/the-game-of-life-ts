@@ -2,13 +2,12 @@ import { Grid } from "../lib/Grid";
 import { make2DArray } from "./make2DArray";
 
 export function nextGeneration(grid: Grid): number[][] {
-  const rows = grid.size.rows;
-  const cols = grid.size.cols;
+  const size = grid.size;
 
-  const next = make2DArray(cols, rows);
+  const next = make2DArray(size);
 
-  for (let i = 0; i < cols; i++) {
-    for (let j = 0; j < rows; j++) {
+  for (let i = 0; i < size; i++) {
+    for (let j = 0; j < size; j++) {
       let state = grid.grid[i][j];
 
       // Count live neighbors
@@ -31,11 +30,10 @@ function countNeighbors(grid: Grid, x: number, y: number): number {
 
   for (let i = -1; i < 2; i++) {
     for (let j = -1; j < 2; j++) {
-      const cols = grid.size.cols;
-      const rows = grid.size.rows;
+      const size = grid.size;
 
-      let col = (x + i + cols) % cols;
-      let row = (y + j + rows) % rows;
+      let col = (x + i + size) % size;
+      let row = (y + j + size) % size;
 
       sum += grid.grid[col][row];
     }

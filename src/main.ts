@@ -1,41 +1,52 @@
+import { examples } from "./examples/examples";
 import { nextGeneration } from "./helpers/nextGeneration";
 import { Canvas } from "./lib/Canvas";
 import { Grid } from "./lib/Grid";
+import { Settings } from "./lib/Settings";
 import "./style.scss";
 
-let canvas: Canvas;
-const cols = 200,
-  rows = 200;
-let grid: Grid;
-let run = false;
-
 function setup(): void {
-  canvas = new Canvas(window.innerHeight - 5, window.innerHeight - 5);
-  grid = new Grid(cols, rows);
-  canvas.drawGrid(grid);
+  Settings.canvas = new Canvas(window.innerHeight - 5);
+  Settings.grid = new Grid(Settings.size);
+  Settings.canvas.drawGrid(Settings.grid);
+  Settings.update();
+
+  const map = document.getElementById("map");
+
+  if (map !== null) {
+    map.innerHTML += `<option value="random" selected>Random</option>`;
+
+    for (const example of examples) {
+      map.innerHTML += `<option value="${example.name}">${example.name}</option>`;
+    }
+  }
 }
 
-function play(): void {
-  // TODO: Delta time
+function play(timestamp: number): void {
+  if (Settings.start === undefined) Settings.start = timestamp;
 
-  if (run) {
-    canvas.drawGrid(grid);
-    grid.update = nextGeneration(grid);
+  const elapsed = timestamp - Settings.start;
+
+  if (elapsed < Settings.refreshRate || !Settings.run) {
+    requestAnimationFrame(play);
+    return;
   }
+
+  Settings.start = timestamp;
+
+  Settings.canvas.drawGrid(Settings.grid);
+  Settings.grid.update = nextGeneration(Settings.grid);
+
   requestAnimationFrame(play);
 }
 
 // Listeners
 window.addEventListener("load", setup);
 document.getElementById("run")?.addEventListener("click", () => {
-  run = !run;
+  Settings.run = !Settings.run;
 });
 document.getElementById("save")?.addEventListener("click", () => {
-  const cells = document.getElementById("cells") as HTMLInputElement;
-  const numberOfCells = parseInt(cells.value);
-
-  grid = new Grid(numberOfCells, numberOfCells);
-  canvas.drawGrid(grid);
+  Settings.update();
 });
 
 requestAnimationFrame(play);

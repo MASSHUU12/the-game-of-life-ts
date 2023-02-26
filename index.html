@@ -12,9 +12,18 @@
   <div class="settings-container">
     <p>Settings</p>
     <div>
-      <label for="items">Cells:</label><input type="number" id="cells" min="1" max="99999" value="250" />
+      <label for="items">Cells:</label>
+      <input type="number" id="cells" min="1" max="9999" value="250" />
     </div>
-    <button id="save">Update simulation</button>
+    <div>
+      <label for="refreshRate">Refresh rate (ms):</label>
+      <input type="number" id="refreshRate" min="1" max="10000" value="300" />
+    </div>
+    <div>
+      <label for="map">Map:</label>
+      <select id="map"></select>
+    </div>
+    <button id="save">Update settings</button>
     <button id="run">Play/Stop</button>
   </div>
   <script type="module" src="/src/main.ts"></script>

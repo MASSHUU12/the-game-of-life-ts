@@ -2,15 +2,18 @@ import { make2DArray } from "../helpers/make2DArray";
 import { randomFill2DArray } from "../helpers/randomFill2DArray";
 
 export class Grid {
-  private _cols: number;
-  private _rows: number;
+  private _size: number;
   private _grid: number[][];
 
-  constructor(cols: number, rows: number) {
-    this._cols = cols;
-    this._rows = rows;
-    this._grid = make2DArray(this._cols, this._rows);
+  constructor(size: number) {
+    this._size = size;
+    this._grid = make2DArray(this._size);
     this._grid = randomFill2DArray(this._grid);
+  }
+
+  public loadExample(example: number[][]): void {
+    this._grid = example;
+    this._size = example.length;
   }
 
   public set update(grid: number[][]) {
@@ -21,10 +24,7 @@ export class Grid {
     return this._grid;
   }
 
-  public get size(): { cols: number; rows: number } {
-    return {
-      cols: this._cols,
-      rows: this._rows,
-    };
+  public get size(): number {
+    return this._size;
   }
 }
