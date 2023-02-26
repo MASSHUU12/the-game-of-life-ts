@@ -1,41 +1,46 @@
-import { blinker } from "./examples/blinker";
+import { toad } from "./examples/toad";
 import { nextGeneration } from "./helpers/nextGeneration";
 import { Canvas } from "./lib/Canvas";
 import { Grid } from "./lib/Grid";
+import { Settings } from "./lib/Settings";
 import "./style.scss";
 
-let canvas: Canvas;
-const size = 200;
-let grid: Grid;
-let run = false;
-
 function setup(): void {
-  canvas = new Canvas(window.innerHeight - 5);
-  grid = new Grid(size);
-
-  grid.loadExample(blinker);
-  canvas.drawGrid(grid);
+  Settings.canvas = new Canvas(window.innerHeight - 5);
+  Settings.grid = new Grid(Settings.size);
+  Settings.grid.loadExample(toad);
+  Settings.canvas.drawGrid(Settings.grid);
+  Settings.update();
 }
 
-function play(): void {
-  if (run) {
-    canvas.drawGrid(grid);
-    grid.update = nextGeneration(grid);
+function play(timestamp: number): void {
+  if (Settings.start === undefined) Settings.start = timestamp;
+
+  const elapsed = timestamp - Settings.start;
+
+  if (elapsed < Settings.refreshRate || !Settings.run) {
+    requestAnimationFrame(play);
+    return;
   }
+
+  Settings.start = timestamp;
+
+  Settings.canvas.drawGrid(Settings.grid);
+  Settings.grid.update = nextGeneration(Settings.grid);
+
   requestAnimationFrame(play);
 }
 
 // Listeners
 window.addEventListener("load", setup);
 document.getElementById("run")?.addEventListener("click", () => {
-  run = !run;
+  Settings.run = !Settings.run;
 });
 document.getElementById("save")?.addEventListener("click", () => {
-  const cells = document.getElementById("cells") as HTMLInputElement;
-  const numberOfCells = parseInt(cells.value);
-
-  grid = new Grid(numberOfCells);
-  canvas.drawGrid(grid);
+  Settings.update();
+});
+document.getElementById("random")?.addEventListener("click", () => {
+  Settings.random();
 });
 
 requestAnimationFrame(play);
