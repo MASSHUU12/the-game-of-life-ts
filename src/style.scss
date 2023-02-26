@@ -25,10 +25,9 @@ body {
   user-select: none;
 
   div {
-    display: flex;
-    gap: 0.3rem;
 
-    input[type=number] {
+    input[type=number],
+    select {
       background-color: whitesmoke;
       border-top: unset;
       border-left: unset;
@@ -37,6 +36,10 @@ body {
       color: gray;
       margin: 0 0 0 0.3rem;
       max-width: 30%;
+    }
+
+    option {
+      color: black;
     }
   }
 

@@ -14,7 +14,7 @@ function setup(): void {
   const map = document.getElementById("map");
 
   if (map !== null) {
-    map.innerHTML += `<option value="random">Random</option>`;
+    map.innerHTML += `<option value="random" selected>Random</option>`;
 
     for (const example of examples) {
       map.innerHTML += `<option value="${example.name}">${example.name}</option>`;
@@ -47,9 +47,6 @@ document.getElementById("run")?.addEventListener("click", () => {
 });
 document.getElementById("save")?.addEventListener("click", () => {
   Settings.update();
-});
-document.getElementById("random")?.addEventListener("click", () => {
-  Settings.random();
 });
 
 requestAnimationFrame(play);
