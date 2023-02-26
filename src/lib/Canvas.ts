@@ -1,5 +1,6 @@
 import { Block } from "../types/types";
 import clamp from "../helpers/math/clamp";
+import { Grid } from "./Grid";
 
 export class Canvas {
   private _canvas: HTMLCanvasElement;
@@ -42,7 +43,10 @@ export class Canvas {
     this._context.fillRect(x, y, w, h);
   }
 
-  public drawGrid(cols: number, rows: number, grid: number[][]): void {
+  public drawGrid(grid: Grid): void {
+    const cols = grid.size.cols;
+    const rows = grid.size.rows;
+
     this.reset();
 
     for (let i = 0; i < rows; i++) {
@@ -55,7 +59,7 @@ export class Canvas {
           y: blockH * j,
           w: blockW,
           h: blockW,
-          color: grid[i][j] === 1 ? "black" : "white",
+          color: grid.grid[i][j] === 1 ? "black" : "white",
         });
       }
     }
