@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
+}
+
+canvas {
+  border: 1px solid black;
+  margin: 2rem 0 0 0;
+}
