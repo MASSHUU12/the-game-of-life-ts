@@ -1,8 +1,8 @@
-export function make2DArray(cols: number, rows: number): any[][] {
-  let arr = new Array(cols);
+export function make2DArray(size: number): any[][] {
+  let arr = new Array(size);
 
-  for (let i = 0; i < arr.length; i++) {
-    arr[i] = new Array(rows);
+  for (let i = 0; i < size; i++) {
+    arr[i] = new Array(size);
   }
   return arr;
 }

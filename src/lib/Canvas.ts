@@ -6,12 +6,12 @@ export class Canvas {
   private _canvas: HTMLCanvasElement;
   private _context: CanvasRenderingContext2D;
 
-  constructor(width: number, height: number) {
+  constructor(size: number) {
     const app = document.querySelector("#app");
     const canv = document.createElement("canvas") as HTMLCanvasElement;
 
-    canv.width = width;
-    canv.height = height;
+    canv.width = size;
+    canv.height = size;
 
     app?.appendChild(canv);
 
@@ -44,15 +44,14 @@ export class Canvas {
   }
 
   public drawGrid(grid: Grid): void {
-    const cols = grid.size.cols;
-    const rows = grid.size.rows;
+    const size = grid.size;
 
     this.reset();
 
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < cols; j++) {
-        const blockW = this._canvas.width / cols;
-        const blockH = this._canvas.height / rows;
+    for (let i = 0; i < size; i++) {
+      for (let j = 0; j < size; j++) {
+        const blockW = this._canvas.width / size;
+        const blockH = this._canvas.height / size;
 
         this.drawBlock({
           x: blockW * i,

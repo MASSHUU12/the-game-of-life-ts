@@ -1,17 +1,19 @@
+import { blinker } from "./examples/blinker";
 import { nextGeneration } from "./helpers/nextGeneration";
 import { Canvas } from "./lib/Canvas";
 import { Grid } from "./lib/Grid";
 import "./style.scss";
 
 let canvas: Canvas;
-const cols = 200,
-  rows = 200;
+const size = 200;
 let grid: Grid;
 let run = false;
 
 function setup(): void {
-  canvas = new Canvas(window.innerHeight - 5, window.innerHeight - 5);
-  grid = new Grid(cols, rows);
+  canvas = new Canvas(window.innerHeight - 5);
+  grid = new Grid(size);
+
+  grid.loadExample(blinker);
   canvas.drawGrid(grid);
 }
 
@@ -32,7 +34,7 @@ document.getElementById("save")?.addEventListener("click", () => {
   const cells = document.getElementById("cells") as HTMLInputElement;
   const numberOfCells = parseInt(cells.value);
 
-  grid = new Grid(numberOfCells, numberOfCells);
+  grid = new Grid(numberOfCells);
   canvas.drawGrid(grid);
 });
 
