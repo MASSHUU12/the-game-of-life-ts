@@ -1,4 +1,4 @@
-import { toad } from "./examples/toad";
+import { pulsar } from "./examples/pulsar";
 import { nextGeneration } from "./helpers/nextGeneration";
 import { Canvas } from "./lib/Canvas";
 import { Grid } from "./lib/Grid";
@@ -8,7 +8,7 @@ import "./style.scss";
 function setup(): void {
   Settings.canvas = new Canvas(window.innerHeight - 5);
   Settings.grid = new Grid(Settings.size);
-  Settings.grid.loadExample(toad);
+  Settings.grid.loadExample(pulsar);
   Settings.canvas.drawGrid(Settings.grid);
   Settings.update();
 }
