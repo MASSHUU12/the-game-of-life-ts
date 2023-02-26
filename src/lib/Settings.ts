@@ -1,3 +1,4 @@
+import { examples } from "../examples/examples";
 import clamp from "../helpers/math/clamp";
 import { Canvas } from "./Canvas";
 import { Grid } from "./Grid";
@@ -19,8 +20,20 @@ export class Settings {
     ) as HTMLInputElement;
     const rate = clamp(parseInt(refreshRateItem.value), 1, 10000);
 
+    const map = document.getElementById("map") as HTMLSelectElement;
+
     Settings.refreshRate = rate;
     Settings.size = numberOfCells;
+
+    if (map.value === "random" || map.value === "") Settings.random();
+    else {
+      for (const example of examples) {
+        if (example.name === map.value) {
+          Settings.grid.loadExample(example.map);
+          Settings.canvas.drawGrid(Settings.grid);
+        }
+      }
+    }
   }
 
   static random() {

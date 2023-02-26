@@ -1,4 +1,4 @@
-import { pulsar } from "./examples/pulsar";
+import { examples } from "./examples/examples";
 import { nextGeneration } from "./helpers/nextGeneration";
 import { Canvas } from "./lib/Canvas";
 import { Grid } from "./lib/Grid";
@@ -8,9 +8,18 @@ import "./style.scss";
 function setup(): void {
   Settings.canvas = new Canvas(window.innerHeight - 5);
   Settings.grid = new Grid(Settings.size);
-  Settings.grid.loadExample(pulsar);
   Settings.canvas.drawGrid(Settings.grid);
   Settings.update();
+
+  const map = document.getElementById("map");
+
+  if (map !== null) {
+    map.innerHTML += `<option value="random">Random</option>`;
+
+    for (const example of examples) {
+      map.innerHTML += `<option value="${example.name}">${example.name}</option>`;
+    }
+  }
 }
 
 function play(timestamp: number): void {
