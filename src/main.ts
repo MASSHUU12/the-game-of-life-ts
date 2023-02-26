@@ -16,8 +16,6 @@ function setup(): void {
 }
 
 function play(): void {
-  // TODO: Delta time
-
   if (run) {
     canvas.drawGrid(grid);
     grid.update = nextGeneration(grid);
