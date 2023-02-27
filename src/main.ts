@@ -1,4 +1,4 @@
-import { examples } from "./examples/examples";
+import examples from "./examples/examples.json";
 import { nextGeneration } from "./helpers/nextGeneration";
 import { Canvas } from "./lib/Canvas";
 import { Grid } from "./lib/Grid";

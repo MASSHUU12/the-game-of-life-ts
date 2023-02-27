@@ -1,4 +1,4 @@
-import { examples } from "../examples/examples";
+import examples from "../examples/examples.json";
 import clamp from "../helpers/math/clamp";
 import { Canvas } from "./Canvas";
 import { Grid } from "./Grid";
